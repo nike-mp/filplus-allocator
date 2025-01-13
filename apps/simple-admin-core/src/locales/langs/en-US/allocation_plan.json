@@ -1,0 +1,15 @@
+{
+  "allocationPlan": {
+    "geography": "In which geographies do you plan on making storage deals",
+    "distributeMethod": "How will you be distributing your data to storage providers",
+    "findMethod": "How did you find your storage providers",
+    "findMethodAdd": "If you answered Others in the previous question, what is the tool or platform you used",
+    "dealsPlan": "How do you plan to make deals to your storage providers",
+    "dealsPlanAdd": "If you answered 'Others/custom tool' in the previous question, enter the details here",
+    "followed": "Can you confirm that you will follow the Fil+ guideline",
+    "applicationId": "Application ID",
+    "addAllocationPlan": "Add DataCap Allocation Plan",
+    "editAllocationPlan": "Edit DataCap Allocation Plan",
+    "allocationPlanList": "DataCap Allocation Plan List"
+  }
+}

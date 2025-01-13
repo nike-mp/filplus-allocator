@@ -1,0 +1,18 @@
+{
+  "storageProvider": {
+    "status": "Status",
+    "address": "Storage Provider address",
+    "location": "Storage Provider location",
+    "organization": "Organization",
+    "totalDeals": "Total Deals Sealed",
+    "percentage": "Percentage of total",
+    "uniqueData": "Unique Data",
+    "duplicate": "Duplicate Deals",
+    "retrievalRate": "Mean Spark Retrieval Success Rate 7d",
+    "remark": "Remark",
+    "applicationId": "Application ID",
+    "addStorageProvider": "Add Storage Provider",
+    "editStorageProvider": "Edit Storage Provider",
+    "storageProviderList": "Storage Provider List"
+  }
+}

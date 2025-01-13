@@ -1,0 +1,20 @@
+{
+  "useCaseDetail": {
+    "describe": "Describe the data being stored onto Filecoin",
+    "sourcedFrom": "Where was the data currently stored in this dataset sourced from?",
+    "sourcedFromAdd": "If you answered 'Other' in the previous question, enter the details here",
+    "region": "If you are a data preparer. What is your location (Country/Region)",
+    "preparedDes": "If you are a data preparer, how will the data be prepared? Please include tooling used and technical details?",
+    "preparedNo": "If you are not preparing the data, who will prepare the data? (Provide name and business)",
+    "explain": "Has this dataset been stored on the Filecoin network before? If so, please explain and make the case why you would like to store this dataset again to the network. Provide details on preparation and/or SP distribution.",
+    "sample": "Please share a sample of the data",
+    "confirm": "Confirm that this is a public dataset that can be retrieved by anyone on the Network",
+    "confirmAdd": "If you chose not to confirm, what was the reason",
+    "retrievalFre": "What is the expected retrieval frequency for this data",
+    "storedTime": "For how long do you plan to keep this dataset stored on Filecoin",
+    "applicationId": "Application ID",
+    "addUseCaseDetail": "Add Use-case Details",
+    "editUseCaseDetail": "Edit Use-case Details",
+    "useCaseDetailList": "Use-case Details List"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "storageProvider": {
+    "status": "状态",
+    "address": "SP 节点号",
+    "location": "位置",
+    "organization": "所属组织机构或公司团体",
+    "totalDeals": "封装量",
+    "percentage": "封装量占比",
+    "uniqueData": "唯一数据量",
+    "duplicate": "重复数据占比",
+    "retrievalRate": "最近7天检索成功率",
+    "remark": "备注",
+    "applicationId": "Application ID",
+    "addStorageProvider": "添加存储提供商",
+    "editStorageProvider": "编辑存储提供商",
+    "storageProviderList": "存储提供商列表"
+  }
+}

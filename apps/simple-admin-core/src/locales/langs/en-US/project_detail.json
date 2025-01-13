@@ -1,0 +1,12 @@
+{
+  "projectDetail": {
+    "status": "Status",
+    "history": "Share a brief history of your project and organization",
+    "associated": "Is this project associated with other projects/ecosystem stakeholders?",
+    "associatedAdd": "If answered yes, what are the other projects/ecosystem stakeholders",
+    "applicationId": "Application ID",
+    "addProjectDetail": "Add Project Details",
+    "editProjectDetail": "Edit Project Details",
+    "projectDetailList": "Project Details List"
+  }
+}

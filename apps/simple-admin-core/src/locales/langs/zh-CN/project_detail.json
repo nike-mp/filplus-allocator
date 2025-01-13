@@ -1,0 +1,12 @@
+{
+  "projectDetail": {
+    "status": "状态",
+    "history": "分享你的项目和组织的简要历史",
+    "associated": "该项目是否与其他项目/生态系统利益相关者相关？",
+    "associatedAdd": "如果回答是，其他项目/生态系统利益相关者有哪些",
+    "applicationId": "申请ID",
+    "addProjectDetail": "添加项目细节",
+    "editProjectDetail": "编辑项目细节",
+    "projectDetailList": "项目细节列表"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "application": {
+    "status": "Status",
+    "applicant": "申请人",
+    "owner": "数据所有者",
+    "country": "数据拥有者国家/地区",
+    "industry": "数据所有者行业",
+    "website": "网站",
+    "social": "社交媒体账号",
+    "socialType": "社交媒体类型",
+    "role": "你的职责与数据集相关吗",
+    "totalAmount": "请求的DataCap总量 (PiB)",
+    "expectedSize": "单个数据集的预期大小(一份副本)(TiB)",
+    "replicas": "要存储的副本数",
+    "weeklyAllocation": "请求每周分配 DataCap (TiB)",
+    "address": "分配的链上地址",
+    "dataType": "应用程序的数据类型",
+    "identifier": "标识符",
+    "progress": "进度",
+    "addApplication": "申请 Application",
+    "editApplication": "编辑 Application",
+    "applicationList": "Application 列表",
+    "userId": "ID",
+    "select": "请选择",
+    "DetailApplication": "Application详情",
+    "DetailStorageProvider": "存储提供商详情"
+  }
+}

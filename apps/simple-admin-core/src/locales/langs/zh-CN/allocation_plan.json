@@ -1,0 +1,15 @@
+{
+  "allocationPlan": {
+    "geography": "您计划在哪些地区进行存储交易",
+    "distributeMethod": "您将如何将数据分发给存储提供商？",
+    "findMethod": "您如何找到您的存储提供商",
+    "findMethodAdd": "如果您在上一个问题中回答“其他”，那么您使用的工具或平台是什么）",
+    "dealsPlan": "您计划如何与存储提供商达成交易？",
+    "dealsPlanAdd": "如果您在上一个问题中回答“其他/自定义工具”，请在此处输入详细信息",
+    "followed": "您能否确认您将遵循 Fil+ 指南",
+    "applicationId": "申请ID",
+    "addAllocationPlan": "添加DataCap 分配计划",
+    "editAllocationPlan": "编辑DataCap 分配计划",
+    "allocationPlanList": "DataCap 分配计划列表"
+  }
+}

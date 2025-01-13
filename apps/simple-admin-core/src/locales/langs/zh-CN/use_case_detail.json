@@ -1,0 +1,20 @@
+{
+  "useCaseDetail": {
+    "describe": "描述存储在 Filecoin 上的数据",
+    "sourcedFrom": "此数据集中当前存储的数据来自哪里？",
+    "sourcedFromAdd": "如果您在上一个问题中回答'其他'，请在此处输入详细信息",
+    "region": "如果您是数据准备者。您的所在地是哪里（国家/地区）",
+    "preparedDes": "如果您是数据准备者，数据将如何准备？请说明使用的工具和技术细节？",
+    "preparedNo": "如果您不准备数据，谁来准备数据？(提供姓名和业务）",
+    "explain": "此数据集之前是否存储在 Filecoin 网络上？如果是，请解释并说明为什么您希望将此数据集再次存储到网络中。提供有关准备和/或 SP 分发的详细信息。",
+    "sample": "请分享数据样本",
+    "confirm": "确认这是一个公共数据集，网络上的任何人都可以检索",
+    "confirmAdd": "如果您选择不确认，原因是什么",
+    "retrievalFre": "此数据的预期检索频率是多少?",
+    "storedTime": "您计划将此数据集存储在 Filecoin 上多长时间",
+    "applicationId": "申请ID",
+    "addUseCaseDetail": "添加用例详细信息",
+    "editUseCaseDetail": "编辑用例详细信息",
+    "useCaseDetailList": "用例详细信息列表"
+  }
+}

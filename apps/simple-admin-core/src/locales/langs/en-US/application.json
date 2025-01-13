@@ -1,0 +1,28 @@
+{
+  "application": {
+    "status": "Status",
+    "applicant": "DataCap Applicant",
+    "owner": "Data Owner Name",
+    "country": "Data Owner Country/Region",
+    "industry": "Data Owner Industry",
+    "website": "Website",
+    "social": "Social Media Handle",
+    "socialType": "Social Media Type",
+    "role": "What is your role related to the dataset",
+    "totalAmount": "Total amount of DataCap being requested (PiB)",
+    "expectedSize": "Expected size of single dataset (one copy)(TiB)",
+    "replicas": "Number of replicas to store",
+    "weeklyAllocation": "Weekly allocation of DataCap requested (TiB) ",
+    "address": "On-chain address for first allocation",
+    "dataType": "Data Type of Application",
+    "identifier": "Identifier",
+    "progress": "Progress",
+    "addApplication": "Add Application",
+    "editApplication": "Edit Application",
+    "applicationList": "Application List",
+    "userId": "userId",
+    "select": "Please select",
+    "DetailApplication": "Application Detail",
+    "DetailStorageProvider": "StorageProvider Detail"
+  }
+}
