@@ -23,14 +23,14 @@ const loginType: BasicOption[] = [
     label: $t('sys.login.captcha'),
     value: 'captcha',
   },
-  {
-    label: $t('sys.login.mobile'),
-    value: 'mobile',
-  },
-  {
-    label: $t('sys.login.email'),
-    value: 'email',
-  },
+  // {
+  //   label: $t('sys.login.mobile'),
+  //   value: 'mobile',
+  // },
+  // {
+  //   label: $t('sys.login.email'),
+  //   value: 'email',
+  // },
 ];
 
 const imgPath = ref<string>('');

@@ -58,7 +58,7 @@ withDefaults(defineProps<Props>(), {
         v-if="!collapsed"
         class="text-foreground truncate text-nowrap font-semibold"
       >
-        {{ text }}
+        Filplus Allocator
       </span>
     </a>
   </div>
