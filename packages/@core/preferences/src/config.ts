@@ -31,8 +31,8 @@ const defaultPreferences: Preferences = {
     styleType: 'normal',
   },
   copyright: {
-    companyName: 'Simple Admin',
-    companySiteLink: 'https://doc.ryansu.tech/zh/',
+    companyName: 'Filplus Allocator',
+    companySiteLink: '',
     date: '2024',
     enable: true,
     icp: '',

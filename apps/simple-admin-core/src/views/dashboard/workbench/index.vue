@@ -90,7 +90,7 @@ function navTo(nav: WorkbenchProjectItem | WorkbenchQuickNavItem) {
       <div class="mr-4 w-full lg:w-3/5">
         <Card :title="$t('sys.sys.version')">
           <TypographyTitle :level="5">
-            Simple Admin v1.6.0 - Preview
+            Filplus Allocator v1.6.0 - Preview
           </TypographyTitle>
         </Card>
       </div>

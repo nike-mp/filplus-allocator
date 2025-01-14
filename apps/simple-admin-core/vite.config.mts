@@ -9,13 +9,13 @@ export default defineConfig(async () => {
           '/fms-api': {
             changeOrigin: true,
             rewrite: (path) => path.replace(/^\/fms-api/, ''),
-            target: 'http://47.119.175.125:19181/',
+            target: 'http://47.121.216.36:19181/',
             ws: true,
           },
           '/mms-api': {
             changeOrigin: true,
             rewrite: (path) => path.replace(/^\/mms-api/, ''),
-            target: 'http://47.119.175.125:19181/',
+            target: 'http://47.121.216.36:19181/',
             ws: true,
           },
           // '/api': {
@@ -28,13 +28,13 @@ export default defineConfig(async () => {
           '/sys-api': {
             changeOrigin: true,
             rewrite: (path) => path.replace(/^\/sys-api/, ''),
-            target: 'http://47.119.175.125:19100/',
+            target: 'http://47.121.216.36:19100/',
             ws: true,
           },
           '/filplus-api': {
             changeOrigin: true,
             rewrite: (path) => path.replace(/^\/filplus-api/, ''),
-            target: 'http://47.119.175.125:18881/',
+            target: 'http://47.121.216.36:18881/',
             ws: true,
           }
         },

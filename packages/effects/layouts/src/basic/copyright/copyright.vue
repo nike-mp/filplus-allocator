@@ -12,9 +12,9 @@ defineOptions({
 });
 
 withDefaults(defineProps<Props>(), {
-  companyName: 'Simple Admin',
+  companyName: 'Filplus Allocator',
   companySiteLink: '',
-  date: '2024',
+  date: '2025',
   icp: '',
   icpLink: '',
 });
@@ -38,11 +38,9 @@ withDefaults(defineProps<Props>(), {
     <!-- Company Link -->
     <a
       v-if="companyName"
-      :href="companySiteLink || 'javascript:void(0)'"
       class="hover:text-primary-hover mx-1"
-      target="_blank"
     >
-      {{ companyName }}
+    Filplus Allocator
     </a>
   </div>
 </template>

@@ -127,7 +127,7 @@ export const useDynamicConfigStore = defineStore('dynamic-config', {
           app: {
             locale: this.defaultLocale as any,
             enablePreferences: this.showSettingButton,
-            name: this.systemName === '' ? 'Simple Admin' : this.systemName,
+            name: this.systemName === '' ? 'Filplus Allocator' : this.systemName,
           },
           logo: {
             enable: true,
