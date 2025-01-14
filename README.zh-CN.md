@@ -10,8 +10,6 @@
 IPFSYUN以官方分配器为原型开发的自动分配器，选取的UI框架是Vben Admin。
 首先注册账号，再申请，经过审核即可开始分配
 
-## 中文文档地址 [点击查看](https://doc.vben.pro/)
-
 ## 预览
 
 ![pic](./img/icon1.png) ![pic](./img/icon2.png) ![pic](./img/icon3.png) ![pic](./img/icon4.png)
