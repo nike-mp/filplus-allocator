@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import type { FallbackProps } from './fallback';
 
-import { computed, defineAsyncComponent } from 'vue';
+import { computed, onMounted, defineAsyncComponent } from 'vue';
 import { useRouter } from 'vue-router';
 
 import { ArrowLeft, RotateCw } from '@vben/icons';
 import { $t } from '@vben/locales';
 import { VbenButton } from '@vben-core/shadcn-ui';
+const router = useRouter();
 
 interface Props extends FallbackProps {}
 
@@ -124,6 +125,13 @@ function back() {
 function refresh() {
   location.reload();
 }
+onMounted(() => {
+  if (
+    router.currentRoute.value.query.state && router.currentRoute.value.query.code
+  ) {
+    push(props.homePath);
+  }
+});
 </script>
 
 <template>
