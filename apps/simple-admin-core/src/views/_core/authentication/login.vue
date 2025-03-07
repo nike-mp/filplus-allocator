@@ -3,16 +3,20 @@ import type { BasicOption } from '@vben/types';
 
 import type { VbenFormSchema } from '#/adapter/form';
 
-import { computed, h, ref } from 'vue';
+import { computed, onMounted, h, ref } from 'vue';
+import { useRouter } from 'vue-router';
 
 import { AuthenticationLogin, z } from '@vben/common-ui';
 import { $t } from '@vben/locales';
+import { useAccessStore } from '@vben/stores';
 
 import { Image } from 'ant-design-vue';
 
 import { getCaptcha, getEmailCaptcha, getSmsCaptcha } from '#/api/sys/captcha';
 import { oauthLogin } from '#/api/sys/oauthProvider';
+import { oauthLoginCallback } from '#/api/sys/oauthProvider';
 import { useAuthStore } from '#/store';
+const router = useRouter();
 
 defineOptions({ name: 'Login' });
 
@@ -205,6 +209,37 @@ const formSchema = computed((): VbenFormSchema[] => {
       formItemClass: 'col-span-2 items-baseline',
     },
   ];
+});
+
+onMounted(() => {
+  const query = ref<string>('');
+  //   // query.value += `?state=${router.currentRoute.value.query.state}`;
+  //   // query.value += `&code=${router.currentRoute.value.query.code}`;
+  if (
+    decodeURIComponent(router.currentRoute.value.query.redirect).split('?')[1]
+  ) {
+    query.value += `?${decodeURIComponent(router.currentRoute.value.query.redirect).split('?')[1]}`;
+    console.info('-----------query----------', query);
+    async function login(url: string) {
+      try {
+        const result = await oauthLoginCallback(url);
+        const { token } = result;
+
+        const accessStore = useAccessStore();
+        const authStore = useAuthStore();
+        // save token
+        accessStore.setAccessToken(token);
+        await authStore.fetchUserInfo();
+        router.replace('/dashboard');
+        // console.info('-----------query1----------',query)
+      } catch {
+        // console.info('-----------query2----------',query)
+        // message.error($t('sys.oauth.createAccount'), 5);
+        // router.replace('/auth/login');
+      }
+    }
+    login(query.value);
+  }
 });
 
 async function handleLogin(values: any) {

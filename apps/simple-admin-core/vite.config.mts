@@ -34,7 +34,7 @@ export default defineConfig(async () => {
           '/filplus-api': {
             changeOrigin: true,
             rewrite: (path) => path.replace(/^\/filplus-api/, ''),
-            target: 'http://47.121.216.36:18881/',
+            target: 'http://47.121.216.36:18880/',
             ws: true,
           }
         },

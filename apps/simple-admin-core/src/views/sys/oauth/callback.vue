@@ -17,8 +17,9 @@ export default defineComponent({
   components: {},
   setup() {
     const query = ref<string>('');
-    query.value += `?state=${router.currentRoute.value.query.state}`;
-    query.value += `&code=${router.currentRoute.value.query.code}`;
+    // query.value += `?state=${router.currentRoute.value.query.state}`;
+    // query.value += `&code=${router.currentRoute.value.query.code}`;
+    query.value += `?${decodeURIComponent(router.currentRoute.value.query.redirect).split('?')[1]}`;
 
     async function login(url: string) {
       try {
