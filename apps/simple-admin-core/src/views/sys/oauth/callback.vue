@@ -17,9 +17,8 @@ export default defineComponent({
   components: {},
   setup() {
     const query = ref<string>('');
-    // query.value += `?state=${router.currentRoute.value.query.state}`;
-    // query.value += `&code=${router.currentRoute.value.query.code}`;
-    query.value += `?${decodeURIComponent(router.currentRoute.value.query.redirect).split('?')[1]}`;
+    query.value += `?state=${router.currentRoute.value.query.state}`;
+    query.value += `&code=${router.currentRoute.value.query.code}`;
 
     async function login(url: string) {
       try {
@@ -31,6 +30,7 @@ export default defineComponent({
         // save token
         accessStore.setAccessToken(token);
         await authStore.fetchUserInfo();
+        router.replace('/dashboard');
       } catch {
         message.error($t('sys.oauth.createAccount'), 5);
         router.replace('/auth/login');

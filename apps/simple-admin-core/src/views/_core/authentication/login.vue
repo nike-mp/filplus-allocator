@@ -212,14 +212,12 @@ const formSchema = computed((): VbenFormSchema[] => {
 });
 
 onMounted(() => {
-  const query = ref<string>('');
-  //   // query.value += `?state=${router.currentRoute.value.query.state}`;
-  //   // query.value += `&code=${router.currentRoute.value.query.code}`;
   if (
-    decodeURIComponent(router.currentRoute.value.query.redirect).split('?')[1]
+    router.currentRoute.value.query.state && router.currentRoute.value.query.code
   ) {
-    query.value += `?${decodeURIComponent(router.currentRoute.value.query.redirect).split('?')[1]}`;
-    console.info('-----------query----------', query);
+    const query = ref<string>('');
+    query.value += `?state=${router.currentRoute.value.query.state}`;
+    query.value += `&code=${router.currentRoute.value.query.code}`;
     async function login(url: string) {
       try {
         const result = await oauthLoginCallback(url);
@@ -231,12 +229,7 @@ onMounted(() => {
         accessStore.setAccessToken(token);
         await authStore.fetchUserInfo();
         router.replace('/dashboard');
-        // console.info('-----------query1----------',query)
-      } catch {
-        // console.info('-----------query2----------',query)
-        // message.error($t('sys.oauth.createAccount'), 5);
-        // router.replace('/auth/login');
-      }
+      } catch {}
     }
     login(query.value);
   }
