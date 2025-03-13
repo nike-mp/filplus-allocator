@@ -21,7 +21,7 @@ export default defineComponent({
       qs = router.currentRoute.value.redirectedFrom.query
     }
     if(router.currentRoute.value.query.state && router.currentRoute.value.query.code){
-      qs = router.currentRoute.value.query.query
+      qs = router.currentRoute.value.query
     }
     if (
       qs
