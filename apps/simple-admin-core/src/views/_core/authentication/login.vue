@@ -3,16 +3,20 @@ import type { BasicOption } from '@vben/types';
 
 import type { VbenFormSchema } from '#/adapter/form';
 
-import { computed, h, ref } from 'vue';
+import { computed, onMounted, h, ref } from 'vue';
+import { useRouter } from 'vue-router';
 
 import { AuthenticationLogin, z } from '@vben/common-ui';
 import { $t } from '@vben/locales';
+import { useAccessStore } from '@vben/stores';
 
 import { Image } from 'ant-design-vue';
 
 import { getCaptcha, getEmailCaptcha, getSmsCaptcha } from '#/api/sys/captcha';
 import { oauthLogin } from '#/api/sys/oauthProvider';
+import { oauthLoginCallback } from '#/api/sys/oauthProvider';
 import { useAuthStore } from '#/store';
+const router = useRouter();
 
 defineOptions({ name: 'Login' });
 
@@ -205,6 +209,38 @@ const formSchema = computed((): VbenFormSchema[] => {
       formItemClass: 'col-span-2 items-baseline',
     },
   ];
+});
+
+onMounted(() => {
+  console.info('callback=',router.currentRoute.value)
+  let qs = null
+  if(router.currentRoute.value.redirectedFrom && router.currentRoute.value.redirectedFrom.query && router.currentRoute.value.redirectedFrom.query.code && router.currentRoute.value.redirectedFrom.query.state){
+    qs = router.currentRoute.value.redirectedFrom.query
+  }
+  if(router.currentRoute.value.query.state && router.currentRoute.value.query.code){
+    qs = router.currentRoute.value.query.query
+  }
+  if (
+    qs
+  ) {
+    const query = ref<string>('');
+    query.value += `?state=${qs.state}`;
+    query.value += `&code=${qs.code}`;
+    async function login(url: string) {
+      try {
+        const result = await oauthLoginCallback(url);
+        const { token } = result;
+
+        const accessStore = useAccessStore();
+        const authStore = useAuthStore();
+        // save token
+        accessStore.setAccessToken(token);
+        await authStore.fetchUserInfo();
+        router.replace('/dashboard');
+      } catch {}
+    }
+    login(query.value);
+  }
 });
 
 async function handleLogin(values: any) {
