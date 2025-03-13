@@ -19,7 +19,7 @@ export default defineComponent({
     const query = ref<string>('');
     query.value += `?state=${router.currentRoute.value.query.state}`;
     query.value += `&code=${router.currentRoute.value.query.code}`;
-
+    console.info('callback-query=',query)
     async function login(url: string) {
       try {
         const result = await oauthLoginCallback(url);
@@ -30,7 +30,6 @@ export default defineComponent({
         // save token
         accessStore.setAccessToken(token);
         await authStore.fetchUserInfo();
-        router.replace('/dashboard');
       } catch {
         message.error($t('sys.oauth.createAccount'), 5);
         router.replace('/auth/login');
