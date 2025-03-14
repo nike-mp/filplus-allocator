@@ -129,7 +129,7 @@ onMounted(() => {
   if (
     router.currentRoute.value.query.state && router.currentRoute.value.query.code
   ) {
-    push('/application/application/index');
+    push(props.homePath);
   }
 });
 </script>
