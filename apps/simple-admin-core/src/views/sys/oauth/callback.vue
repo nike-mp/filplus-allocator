@@ -47,7 +47,7 @@ export default defineComponent({
 
     login(query.value);
     return {};
-  },
+  }
 });
 </script>
 <template>
