@@ -16,38 +16,45 @@ export default defineComponent({
   name: 'OauthCallbackPage',
   components: {},
   setup() {
-    let qs = null
-    if(router.currentRoute.value.redirectedFrom && router.currentRoute.value.redirectedFrom.query && router.currentRoute.value.redirectedFrom.query.code && router.currentRoute.value.redirectedFrom.query.state){
-      qs = router.currentRoute.value.redirectedFrom.query
-    }
-    if(router.currentRoute.value.query.state && router.currentRoute.value.query.code){
-      qs = router.currentRoute.value.query
+    let qs = null;
+    if (
+      router.currentRoute.value.redirectedFrom &&
+      router.currentRoute.value.redirectedFrom.query &&
+      router.currentRoute.value.redirectedFrom.query.code &&
+      router.currentRoute.value.redirectedFrom.query.state
+    ) {
+      qs = router.currentRoute.value.redirectedFrom.query;
     }
     if (
-      qs
+      router.currentRoute.value.query.state &&
+      router.currentRoute.value.query.code
     ) {
+      qs = router.currentRoute.value.query;
+    }
+    if (qs) {
       const query = ref<string>('');
       query.value += `?state=${qs.state}`;
       query.value += `&code=${qs.code}`;
-    async function login(url: string) {
-      try {
-        const result = await oauthLoginCallback(url);
-        const { token } = result;
+      async function login(url: string) {
+        try {
+          const result = await oauthLoginCallback(url);
+          const { token } = result;
 
-        const accessStore = useAccessStore();
-        const authStore = useAuthStore();
-        // save token
-        accessStore.setAccessToken(token);
-        await authStore.fetchUserInfo();
-      } catch {
-        message.error($t('sys.oauth.createAccount'), 5);
-        router.replace('/auth/login');
+          const accessStore = useAccessStore();
+          const authStore = useAuthStore();
+          // save token
+          accessStore.setAccessToken(token);
+          await authStore.fetchUserInfo();
+        } catch {
+          message.error($t('sys.oauth.createAccount'), 5);
+          router.replace('/auth/login');
+        }
       }
-    }
 
-    login(query.value);
-    return {};
-  }
+      login(query.value);
+      return {};
+    }
+  },
 });
 </script>
 <template>
