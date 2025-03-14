@@ -212,14 +212,19 @@ const formSchema = computed((): VbenFormSchema[] => {
 });
 
 onMounted(() => {
-  console.info('callback=',router.currentRoute.value)
+  let params = new URLSearchParams(window.location.search)
   let qs = null
   if(router.currentRoute.value.redirectedFrom && router.currentRoute.value.redirectedFrom.query && router.currentRoute.value.redirectedFrom.query.code && router.currentRoute.value.redirectedFrom.query.state){
     qs = router.currentRoute.value.redirectedFrom.query
-  }
-  if(router.currentRoute.value.query.state && router.currentRoute.value.query.code){
+  }else if(router.currentRoute.value.query.state && router.currentRoute.value.query.code){
     qs = router.currentRoute.value.query
+  }else if(params.get('state') && params.get('code')){
+    qs = {
+      state: params.get('state'),
+      code: params.get('code')
+    }
   }
+  console.info('callback=',router.currentRoute.value,qs)
   if (
     qs
   ) {
