@@ -251,7 +251,7 @@ onMounted(() => {
           // save token
           accessStore.setAccessToken(token);
           await authStore.fetchUserInfo();
-          router.replace('/dashboard');
+          router.replace('/application/application/index');
         } catch {}
       }
       login(query.value);
