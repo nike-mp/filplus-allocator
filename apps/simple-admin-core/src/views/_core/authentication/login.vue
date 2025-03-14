@@ -3,16 +3,20 @@ import type { BasicOption } from '@vben/types';
 
 import type { VbenFormSchema } from '#/adapter/form';
 
-import { computed, h, ref } from 'vue';
+import { computed, onMounted, h, ref } from 'vue';
+import { useRouter } from 'vue-router';
 
 import { AuthenticationLogin, z } from '@vben/common-ui';
 import { $t } from '@vben/locales';
+import { useAccessStore } from '@vben/stores';
 
 import { Image } from 'ant-design-vue';
 
 import { getCaptcha, getEmailCaptcha, getSmsCaptcha } from '#/api/sys/captcha';
 import { oauthLogin } from '#/api/sys/oauthProvider';
+import { oauthLoginCallback } from '#/api/sys/oauthProvider';
 import { useAuthStore } from '#/store';
+const router = useRouter();
 
 defineOptions({ name: 'Login' });
 
@@ -37,6 +41,7 @@ const imgPath = ref<string>('');
 const captchaId = ref<string>('');
 const msgType = ref<string>('');
 const target = ref<string>('');
+const githubCode = ref<string>('');
 
 // get captcha
 async function getCaptchaData() {
@@ -207,6 +212,53 @@ const formSchema = computed((): VbenFormSchema[] => {
   ];
 });
 
+onMounted(() => {
+  githubCode.value = localStorage.getItem('githubCode') || '';
+  if (!githubCode.value) {
+    let params = new URLSearchParams(window.location.search);
+    let qs = null;
+    if (
+      router.currentRoute.value.redirectedFrom &&
+      router.currentRoute.value.redirectedFrom.query &&
+      router.currentRoute.value.redirectedFrom.query.code &&
+      router.currentRoute.value.redirectedFrom.query.state
+    ) {
+      qs = router.currentRoute.value.redirectedFrom.query;
+    } else if (
+      router.currentRoute.value.query.state &&
+      router.currentRoute.value.query.code
+    ) {
+      qs = router.currentRoute.value.query;
+    } else if (params.get('state') && params.get('code')) {
+      qs = {
+        state: params.get('state'),
+        code: params.get('code'),
+      };
+    }
+    console.info('callback=', router.currentRoute.value, qs);
+    if (qs) {
+      const query = ref<string>('');
+      query.value += `?state=${qs.state}`;
+      query.value += `&code=${qs.code}`;
+      localStorage.setItem('githubCode', JSON.stringify(qs.code));
+      async function login(url: string) {
+        try {
+          const result = await oauthLoginCallback(url);
+          const { token } = result;
+
+          const accessStore = useAccessStore();
+          const authStore = useAuthStore();
+          // save token
+          accessStore.setAccessToken(token);
+          await authStore.fetchUserInfo();
+          router.replace('/dashboard');
+        } catch {}
+      }
+      login(query.value);
+    }
+  }
+});
+
 async function handleLogin(values: any) {
   switch (values.selectLoginType) {
     case 'captcha': {
@@ -279,6 +331,7 @@ async function handleOauthLogin(provider: string) {
     state: `${new Date().getMilliseconds()}-${provider}`,
     provider,
   });
+  if (provider === 'github') localStorage.removeItem('githubCode');
   if (result.code === 0) window.open(result.data.URL);
 }
 </script>

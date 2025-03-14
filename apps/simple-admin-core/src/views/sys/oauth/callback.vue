@@ -16,28 +16,44 @@ export default defineComponent({
   name: 'OauthCallbackPage',
   components: {},
   setup() {
-    const query = ref<string>('');
-    query.value += `?state=${router.currentRoute.value.query.state}`;
-    query.value += `&code=${router.currentRoute.value.query.code}`;
-
-    async function login(url: string) {
-      try {
-        const result = await oauthLoginCallback(url);
-        const { token } = result;
-
-        const accessStore = useAccessStore();
-        const authStore = useAuthStore();
-        // save token
-        accessStore.setAccessToken(token);
-        await authStore.fetchUserInfo();
-      } catch {
-        message.error($t('sys.oauth.createAccount'), 5);
-        router.replace('/auth/login');
-      }
+    let qs = null;
+    if (
+      router.currentRoute.value.redirectedFrom &&
+      router.currentRoute.value.redirectedFrom.query &&
+      router.currentRoute.value.redirectedFrom.query.code &&
+      router.currentRoute.value.redirectedFrom.query.state
+    ) {
+      qs = router.currentRoute.value.redirectedFrom.query;
     }
+    if (
+      router.currentRoute.value.query.state &&
+      router.currentRoute.value.query.code
+    ) {
+      qs = router.currentRoute.value.query;
+    }
+    if (qs) {
+      const query = ref<string>('');
+      query.value += `?state=${qs.state}`;
+      query.value += `&code=${qs.code}`;
+      async function login(url: string) {
+        try {
+          const result = await oauthLoginCallback(url);
+          const { token } = result;
 
-    login(query.value);
-    return {};
+          const accessStore = useAccessStore();
+          const authStore = useAuthStore();
+          // save token
+          accessStore.setAccessToken(token);
+          await authStore.fetchUserInfo();
+        } catch {
+          message.error($t('sys.oauth.createAccount'), 5);
+          router.replace('/auth/login');
+        }
+      }
+
+      login(query.value);
+      return {};
+    }
   },
 });
 </script>
