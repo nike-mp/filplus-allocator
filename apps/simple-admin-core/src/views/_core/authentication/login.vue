@@ -41,6 +41,7 @@ const imgPath = ref<string>('');
 const captchaId = ref<string>('');
 const msgType = ref<string>('');
 const target = ref<string>('');
+const loading = ref(true);
 
 // get captcha
 async function getCaptchaData() {
@@ -212,39 +213,43 @@ const formSchema = computed((): VbenFormSchema[] => {
 });
 
 onMounted(() => {
-  let params = new URLSearchParams(window.location.search)
-  let qs = null
-  if(router.currentRoute.value.redirectedFrom && router.currentRoute.value.redirectedFrom.query && router.currentRoute.value.redirectedFrom.query.code && router.currentRoute.value.redirectedFrom.query.state){
-    qs = router.currentRoute.value.redirectedFrom.query
-  }else if(router.currentRoute.value.query.state && router.currentRoute.value.query.code){
-    qs = router.currentRoute.value.query
-  }else if(params.get('state') && params.get('code')){
-    qs = {
-      state: params.get('state'),
-      code: params.get('code')
+  if(loading.value){
+    let params = new URLSearchParams(window.location.search)
+    let qs = null
+    if(router.currentRoute.value.redirectedFrom && router.currentRoute.value.redirectedFrom.query && router.currentRoute.value.redirectedFrom.query.code && router.currentRoute.value.redirectedFrom.query.state){
+      qs = router.currentRoute.value.redirectedFrom.query
+    }else if(router.currentRoute.value.query.state && router.currentRoute.value.query.code){
+      qs = router.currentRoute.value.query
+    }else if(params.get('state') && params.get('code')){
+      qs = {
+        state: params.get('state'),
+        code: params.get('code')
+      }
     }
-  }
-  console.info('callback=',router.currentRoute.value,qs)
-  if (
-    qs
-  ) {
-    const query = ref<string>('');
-    query.value += `?state=${qs.state}`;
-    query.value += `&code=${qs.code}`;
-    async function login(url: string) {
-      try {
-        const result = await oauthLoginCallback(url);
-        const { token } = result;
+    console.info('callback=',router.currentRoute.value,qs)
+    if (
+      qs
+    ) {
+      const query = ref<string>('');
+      query.value += `?state=${qs.state}`;
+      query.value += `&code=${qs.code}`;
+      async function login(url: string) {
+        try {
+          const result = await oauthLoginCallback(url);
+          const { token } = result;
 
-        const accessStore = useAccessStore();
-        const authStore = useAuthStore();
-        // save token
-        accessStore.setAccessToken(token);
-        await authStore.fetchUserInfo();
-        router.replace('/dashboard');
-      } catch {}
+          const accessStore = useAccessStore();
+          const authStore = useAuthStore();
+          // save token
+          accessStore.setAccessToken(token);
+          await authStore.fetchUserInfo();
+          router.replace('/dashboard');
+        } catch {
+          loading.value = false;
+        }
+      }
+      login(query.value);
     }
-    login(query.value);
   }
 });
 
